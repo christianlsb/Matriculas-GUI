@@ -1,4 +1,7 @@
 package src.view;
-public class TabelaAluno {
+
+import javax.swing.table.AbstractTableModel;
+
+public class TabelaAluno extends AbstractTableModel  {
     
 }
