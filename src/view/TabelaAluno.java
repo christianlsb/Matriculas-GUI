@@ -1,15 +1,16 @@
 package src.view;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import src.model.CadastroAluno;
+import src.model.Aluno;
 
 public class TabelaAluno extends AbstractTableModel  {
     
     //Lista dos cadastros de alunos.
-    private ArrayList<CadastroAluno> cadastrosAlunos = new ArrayList<CadastroAluno>();
+    private ArrayList<Aluno> alunos = new ArrayList<Aluno>();
 
     //Array que titula as colunas da tabela:
     private String[] colunas = new String[] {"Nome completo", "Idade", "E-mail", 
@@ -17,13 +18,13 @@ public class TabelaAluno extends AbstractTableModel  {
                                             "Curso", "Observações", "Ativo"};
 
     //Construtor:
-    public TabelaAluno(ArrayList<CadastroAluno> cadastrosAlunos){
-        this.cadastrosAlunos = cadastrosAlunos;
+    public TabelaAluno(ArrayList<Aluno> alunos){
+        this.alunos = alunos;
     }
     //Método que retorna a quantidade de linhas da tabela (JTable):
 	@Override
 	public int getRowCount() {
-		return cadastrosAlunos.size();
+		return alunos.size();
 	}
     //Método que retorna a quantidade de linhas da tabela (JTable):
 	@Override
@@ -42,40 +43,65 @@ public class TabelaAluno extends AbstractTableModel  {
         //Se inválido retorna String vazia.
 		return nomeColuna;
 	}
+	//Método que retorna o valor de acordo com o index da coluna e da linha.
 	@Override
 	public Object getValueAt(int indexLinha, int indexColuna) {
 		String value = null;
 
-		if (indexLinha >= 0 && indexLinha < cadastrosAlunos.size()) {
-			CadastroAluno cadastroAluno = cadastrosAlunos.get(indexLinha);
+		if (indexLinha >= 0 && indexLinha < alunos.size()) {
+			Aluno aluno = alunos.get(indexLinha);
 
 			switch (indexColuna) {
 			case 0:
-				value = cadastroAluno.getNomeCompleto();
+				value = aluno.getNomeCompleto();
 				break;
 			case 1:
-				value = Integer.toString(cadastroAluno.getIdadeMatricula());
+				value = Integer.toString(aluno.getIdadeMatricula());
 				break;
 			case 2:
-				value = cadastroAluno.getEmail();
+				value = aluno.getEmail();
 				break;
             case 3:
-                value = cadastroAluno.getEndereco();
+                value = aluno.getEndereco();
             case 4:
-                value = cadastroAluno.getCep();
+                value = aluno.getCep();
             case 5:
-                value = cadastroAluno.getTelefone();
+                value = aluno.getTelefone();
             case 6:
-                value = cadastroAluno.getCurso();
+                value = aluno.getCurso();
             case 7:
-                value = cadastroAluno.getObservacoes();
+                value = aluno.getObservacoes();
             case 8:
-                value = Boolean.toString(cadastroAluno.getAtivo());
+                value = Boolean.toString(aluno.getAtivo());
 			default:
-				System.err.printf("[ERRO] Índice de coluna inválido: %d\n", indexColuna);
+				System.err.printf("Erro! O índex %d da coluna não é válido.\n", indexColuna);
 			}
 		}
 		return value;
 	}
+
+	//Método que retorna o aluno na linha do index parâmetro.
+	public Aluno getAluno(int indexLinha){
+		//Se o index não for válido retorna um aluno null.
+		Aluno aluno = null;
+		
+		//Busca o aluno de acordo com o index da linha.
+		if(indexLinha >= 0 && indexLinha < alunos.size()){
+			aluno = alunos.get(indexLinha);
+		}
+
+		return aluno;
+	}
+
+	public void carregar(ArrayList<Aluno> alunos) {
+		this.alunos = alunos;
+		fireTableDataChanged();
+	}
+
+	public void remover(Aluno aluno) {
+		alunos.remove(aluno);
+		fireTableDataChanged();
+	}
+
 }//Fim da classe TabelaAluno
 

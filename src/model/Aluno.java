@@ -2,7 +2,7 @@ package src.model;
 
 import java.util.ArrayList;
 
-public class CadastroAluno {
+public class Aluno {
     private String nomeCompleto;
     private int idadeMatricula;
     private String email;
