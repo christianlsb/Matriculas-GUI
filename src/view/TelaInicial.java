@@ -2,6 +2,12 @@ package src.view;
 import javax.swing.*;
 import java.awt.*;
 
+
+import src.model.CadastroAluno;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class TelaInicial extends JPanel {
     // Atributos
     private Tela tela;
@@ -9,6 +15,7 @@ public class TelaInicial extends JPanel {
     private JButton botao;
     private JPanel mainPainel;
     private JTable tabela;
+    private JButton botaoExcluir;
 
     // Construtor
     public TelaInicial(Tela tela) {
@@ -40,9 +47,18 @@ public class TelaInicial extends JPanel {
         sidePainel.add(botao);
         botao = new JButton("ATUALIZAR");
         sidePainel.add(botao);
-        botao = new JButton("EXCLUIR");
-        sidePainel.add(botao);
+        botaoExcluir = new JButton("EXCLUIR");
+        botaoExcluir.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+               //CadastroAluno cadastroAluno
+            }
+        });
+       
+        sidePainel.add(botaoExcluir);
     }
+
+   
 
     private void inserirTabela(JPanel mainPainel){
         tabela = new JTable(20,9);
