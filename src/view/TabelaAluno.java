@@ -75,10 +75,7 @@ public class TabelaAluno extends AbstractTableModel  {
 				System.err.printf("[ERRO] Índice de coluna inválido: %d\n", indexColuna);
 			}
 		}
-
 		return value;
 	}
-
-
-}
+}//Fim da classe TabelaAluno
 
