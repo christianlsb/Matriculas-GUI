@@ -45,44 +45,38 @@ public class TelaInicial extends JPanel {
         c.gridx = 1;
         c.gridy = 0;
 
-        inserirMainCabecalho(mainPainel);
         inserirMainTabela(mainPainel);
         add(mainPainel, c);
     }
 
     private void inserirSideBotoes(JPanel sidePainel){
         JPanel divBtn = new JPanel();
-        divBtn.setLayout(layout);
-
-        
+        divBtn.setLayout(new GridLayout(0, 1, 10, 10));
 
         botao = new JButton("CRIAR");
-        c.gridx = 0;
-        c.gridy = 0;
-        sidePainel.add(botao, c);
+        divBtn.add(botao);
 
         botao = new JButton("ATUALIZAR");
-        c.gridx = 0;
-        c.gridy = 1;
-        sidePainel.add(botao, c);
+        divBtn.add(botao);
 
         botao = new JButton("EXCLUIR");
-        c.gridx = 0;
-        c.gridy = 2;
-        sidePainel.add(botao, c);
+        divBtn.add(botao);
 
+        sidePainel.add(divBtn);
     }
 
-    private void inserirMainCabecalho(JPanel mainPainel){
-        JLabel cabecalhoMain = new JLabel("Tabela de estudantes", JLabel.CENTER);
-
-        mainPainel.add(cabecalhoMain);
-    }
 
     private void inserirMainTabela(JPanel mainPainel){
+        JPanel divTabela = new JPanel();
+        divTabela.setLayout(new GridLayout(0, 1));
+
+        JLabel cabecalhoMain = new JLabel("Tabela de estudantes", JLabel.CENTER);
         tabela = new JTable(20,9);
-        
-        mainPainel.add(tabela);
+
+        divTabela.add(cabecalhoMain);
+        divTabela.add(tabela);
+
+        mainPainel.add(divTabela);
     }
 
 }
