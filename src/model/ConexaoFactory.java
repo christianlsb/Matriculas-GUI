@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 //BAIXAR O DRIVER DO SQL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //Descompactar a pasta, e por o .jar dentro do diretório do projeto.
+//Rodar com o comando: java -cp ".;./mysql-connector-j-8.2.0.jar" Main
 
 public class ConexaoFactory { 
     //Protocolo pra conversar com o banco, porta para localizar o processo, database.
