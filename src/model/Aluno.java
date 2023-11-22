@@ -3,8 +3,9 @@ package src.model;
 import java.util.ArrayList;
 
 public class Aluno {
+    private int id;
     private String nomeCompleto;
-    private int idadeMatricula;
+    private int idade;
     private String email;
     private String endereco;
     private String cep;
@@ -15,6 +16,15 @@ public class Aluno {
     private String observacoes;
     private Boolean ativo;
   
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
     public String getNomeCompleto() {
         return this.nomeCompleto;
     }
@@ -23,12 +33,12 @@ public class Aluno {
         this.nomeCompleto = nomeCompleto;
     }
 
-    public int getIdadeMatricula() {
-        return this.idadeMatricula;
+    public int getIdade() {
+        return this.idade;
     }
 
-    public void setIdadeMatricula(int idadeMatricula) {
-        this.idadeMatricula = idadeMatricula;
+    public void setIdade(int idade) {
+        this.idade = idade;
     }
 
     public String getEmail() {

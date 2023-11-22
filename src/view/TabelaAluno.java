@@ -56,7 +56,7 @@ public class TabelaAluno extends AbstractTableModel  {
 				value = aluno.getNomeCompleto();
 				break;
 			case 1:
-				value = Integer.toString(aluno.getIdadeMatricula());
+				value = Integer.toString(aluno.getIdade());
 				break;
 			case 2:
 				value = aluno.getEmail();
