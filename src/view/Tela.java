@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class Tela extends JFrame {
     // Atributos
-    public static final String titulo = "TELA INICIALs";
+    public static final String titulo = "TELA INICIAL";
     private CardLayout cardLayout;
     private JPanel cardPainel;
     private TelaInicial telaInicial;
