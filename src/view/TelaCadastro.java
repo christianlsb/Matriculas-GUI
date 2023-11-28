@@ -31,7 +31,7 @@ public class TelaCadastro extends JPanel {
     private JCheckBox ativoCb;
     private JButton salvarBtn;
     private JButton cancelarBtn;
-    private JButton buscaBtn;
+
 
     //construtor
     public TelaCadastro(){
