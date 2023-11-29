@@ -16,11 +16,12 @@ public class Tela extends JFrame {
     public Tela(){
         super(titulo);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setResizable(true);
 
         this.cardLayout = new CardLayout();
         
-        this.cardPainel = new JPanel();
-        this.cardPainel.setLayout(cardLayout);
+        cardPainel = new JPanel();
+        cardPainel.setLayout(cardLayout);
         add(cardPainel);
 
         criarCards();
@@ -28,7 +29,7 @@ public class Tela extends JFrame {
 
     // Métodos
     public void mostrar(){
-		pack();
+        pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
     }
