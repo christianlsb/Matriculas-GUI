@@ -232,7 +232,5 @@ public class TelaCadastro extends JPanel {
         });
         panel.add(cancelarBtn);
     }
-    
-    
 }
     
