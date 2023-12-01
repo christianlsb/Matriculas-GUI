@@ -1,5 +1,8 @@
 package src.view;
 import javax.swing.*;
+
+import src.model.CadastroAluno;
+
 import java.awt.*;
 
 import static java.awt.GridBagConstraints.LINE_START;
@@ -110,6 +113,7 @@ public class TelaInicial extends JPanel {
         c.fill = GridBagConstraints.BOTH;
         mainPainel.add(cabecalhoMain, c);
 
+        tableModel = new TabelaAluno()
         tabela = new JTable(37,9);
         c.gridx = 0;
         c.gridy = 1;

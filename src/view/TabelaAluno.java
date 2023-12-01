@@ -61,21 +61,38 @@ public class TabelaAluno extends AbstractTableModel  {
 				break;
             case 3:
                 value = cadastroAluno.getEndereco();
+				break;
             case 4:
                 value = cadastroAluno.getCep();
+				break;
             case 5:
                 value = cadastroAluno.getTelefone();
+				break;
             case 6:
                 value = cadastroAluno.getCurso();
+				break;
             case 7:
                 value = cadastroAluno.getObservacoes();
+				break;
             case 8:
                 value = Boolean.toString(cadastroAluno.getAtivo());
+				break;
 			default:
 				System.err.printf("[ERRO] Índice de coluna inválido: %d\n", indexColuna);
 			}
 		}
 		return value;
+	}// Fim do método de pegar valor
+
+	public CadastroAluno getCadastroAluno(int indiceLinha) {
+		CadastroAluno cadastroAluno = null;
+
+		if (indiceLinha >= 0 && indiceLinha < cadastrosAlunos.size()) {
+			cadastroAluno = cadastrosAlunos.get(indiceLinha);
+		}
+		return cadastroAluno;
 	}
+
+
 }//Fim da classe TabelaAluno
 
