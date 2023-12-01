@@ -113,12 +113,11 @@ public class TelaInicial extends JPanel {
         c.fill = GridBagConstraints.BOTH;
         mainPainel.add(cabecalhoMain, c);
 
-        tableModel = new TabelaAluno()
+        tableModel = new TabelaAluno();
         tabela = new JTable(37,9);
         c.gridx = 0;
         c.gridy = 1;
         c.fill = GridBagConstraints.BOTH;
         mainPainel.add(tabela, c);
     }
-
 }
