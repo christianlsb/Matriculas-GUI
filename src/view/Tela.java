@@ -35,7 +35,7 @@ public class Tela extends JFrame {
 		setVisible(true);
     }
     private void criarCards(){
-        telaCadastro = new TelaCadastro();
-        cardPainel.add(telaInicial, TelaCadastro.class.getName());
+        telaInicial = new TelaInicial(this);
+        cardPainel.add(telaInicial, TelaInicial.class.getName());
     }
 } // Fim da classe TelaPrincipal

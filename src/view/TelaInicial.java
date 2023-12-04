@@ -76,11 +76,11 @@ public class TelaInicial extends JPanel {
         divBtn.add(botao, c);
 
         botaoExcluir  = new JButton("EXCLUIR");
-        botao.setPreferredSize(new Dimension(130,50));
-        botao.setFont(new Font("Times New Roman", Font.PLAIN, 17));
+        botaoExcluir.setPreferredSize(new Dimension(130,50));
+        botaoExcluir.setFont(new Font("Times New Roman", Font.PLAIN, 17));
         c.gridx = 0;
         c.gridy = 2;
-        divBtn.add(botao, c);
+        divBtn.add(botaoExcluir, c);
          botaoExcluir.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
@@ -131,7 +131,7 @@ public class TelaInicial extends JPanel {
         c.fill = GridBagConstraints.BOTH;
         mainPainel.add(cabecalhoMain, c);
 
-        tableModel = new TabelaAluno();
+        // tableModel = new TabelaAluno();
         tabela = new JTable(37,9);
         c.gridx = 0;
         c.gridy = 1;
