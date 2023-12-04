@@ -1,10 +1,13 @@
 package src.view;
 import javax.swing.*;
 
+import src.model.Aluno;
+import src.model.ArmazenamentoAlunos;
 import src.model.CadastroAluno;
 
 import java.awt.*;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import static java.awt.GridBagConstraints.LINE_START;
 
 public class TelaInicial extends JPanel {
@@ -16,6 +19,11 @@ public class TelaInicial extends JPanel {
     private JButton botao;
     private JPanel mainPainel;
     private JTable tabela;
+    private JButton botaoExcluir;
+    TabelaAluno tableModel;
+    TelaInicial TelaInicial;
+    ArmazenamentoAlunos armazenamentoAlunos;
+    Aluno aluno;
 
     // Construtor
     public TelaInicial(Tela tela) {
@@ -67,13 +75,23 @@ public class TelaInicial extends JPanel {
         c.gridy = 1;
         divBtn.add(botao, c);
 
-        botao = new JButton("EXCLUIR");
+        botaoExcluir  = new JButton("EXCLUIR");
         botao.setPreferredSize(new Dimension(130,50));
         botao.setFont(new Font("Times New Roman", Font.PLAIN, 17));
         c.gridx = 0;
         c.gridy = 2;
         divBtn.add(botao, c);
-
+         botaoExcluir.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+               CadastroAluno cadastroAluno = tableModel.getCadastroAluno(tabela.getSelectedRow());
+               int resposta = JOptionPane.showConfirmDialog(TelaInicial, "Deseja excluir o cadastro de " + cadastroAluno.getNomeCompleto() + "?", "Excluir", JOptionPane.YES_NO_OPTION);
+               if(resposta == JOptionPane.YES_OPTION){
+                   ArmazenamentoAlunos.remover(aluno);
+                   JOptionPane.showMessageDialog(TelaInicial, "Cadastro excluído com sucesso!", "Excluir", JOptionPane.INFORMATION_MESSAGE);
+            }
+    }});
+    
         // GridConstraints de sidePainel
         c.gridx = 0;
         c.gridy = 0;
