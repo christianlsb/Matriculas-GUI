@@ -13,6 +13,8 @@ public class Tela extends JFrame {
     private TelaInicial telaInicial;
     private TelaCadastro telaCadastro;
 
+  
+
     // Construtor
     public Tela(){
         super(titulo);

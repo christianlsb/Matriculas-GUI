@@ -220,7 +220,7 @@ public class TelaCadastro extends JPanel {
                 JOptionPane.showMessageDialog(TelaCadastro.this, "Cadastro feito com sucesso!", Tela.titulo,
 						JOptionPane.INFORMATION_MESSAGE);
 
-                    tela.mostrarTelaInicial;
+                    tela.mostrarTelaInicial();
 
             }
         });
@@ -232,7 +232,7 @@ public class TelaCadastro extends JPanel {
         cancelarBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                tela.mostrarTelaInicial;
+                tela.mostrarTelaInicial();
             }
         });
         panel.add(cancelarBtn);
