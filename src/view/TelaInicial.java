@@ -1,6 +1,7 @@
 package src.view;
 import javax.swing.*;
 
+import src.model.ArmazenamentoAlunos;
 import src.model.CadastroAluno;
 
 import java.awt.*;
@@ -9,6 +10,7 @@ import static java.awt.GridBagConstraints.LINE_START;
 
 public class TelaInicial extends JPanel {
     // Atributos
+    private TabelaAluno tabelAluno;
     private Tela tela;
     private GridBagLayout layout;
     private GridBagConstraints c;
@@ -32,6 +34,11 @@ public class TelaInicial extends JPanel {
         inserirMainPainel();
     }
     // Métodos
+
+    public void recarregar(){
+        tabelAluno.carregar(ArmazenamentoAlunos.listar());
+        
+    }
     private void inserirSidePainel(){
         sidePainel = new JPanel();
         sidePainel.setLayout(layout);
@@ -120,4 +127,5 @@ public class TelaInicial extends JPanel {
         c.fill = GridBagConstraints.BOTH;
         mainPainel.add(tabela, c);
     }
+d 
 }

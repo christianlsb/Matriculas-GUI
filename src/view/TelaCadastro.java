@@ -2,6 +2,8 @@ package src.view;
 
 import javax.swing.*;
 
+import src.model.Aluno;
+import src.model.ArmazenamentoAlunos;
 import src.model.CadastroAluno;
 
 import java.awt.*;
@@ -12,8 +14,9 @@ import java.awt.event.ComponentEvent;
 
 public class TelaCadastro extends JPanel {
     private static final Insets FIELD_INSETS = new Insets(5, 10, 0, 0);
-
+    private Aluno aluno;
     private CadastroAluno cadastro;
+    private Tela tela;
 
     private GridBagLayout layout;
     private GridBagConstraints constraints;
@@ -198,7 +201,7 @@ public class TelaCadastro extends JPanel {
                     cadastro.setCurso(cursoTxt.getText());
                     cadastro.setObservacoes(observacoesTxt.getText());
                     cadastro.setAtivo(ativoCb.isSelected());
-                    // inserir(cadastro);
+                    ArmazenamentoAlunos.inserir(aluno);
                 }else{
                     cadastro = new CadastroAluno();
                     cadastro.setNomeCompleto(nomeCompletoTxt.getText());
@@ -212,10 +215,12 @@ public class TelaCadastro extends JPanel {
                     cadastro.setCurso(cursoTxt.getText());
                     cadastro.setObservacoes(observacoesTxt.getText());
                     cadastro.setAtivo(ativoCb.isSelected());
-                    // atualizar(cadastro);
+                    ArmazenamentoAlunos.atualizar(aluno);
                 }
-                JOptionPane.showMessageDialog(TelaCadastro.this, "Cadastro feito com sucesso!", null,
+                JOptionPane.showMessageDialog(TelaCadastro.this, "Cadastro feito com sucesso!", Tela.titulo,
 						JOptionPane.INFORMATION_MESSAGE);
+
+                    tela.mostrarTelaInicial;
 
             }
         });
@@ -227,7 +232,7 @@ public class TelaCadastro extends JPanel {
         cancelarBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                //função de ir para a lista de cadastro
+                tela.mostrarTelaInicial;
             }
         });
         panel.add(cancelarBtn);

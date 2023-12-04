@@ -1,15 +1,17 @@
 package src.view;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import src.model.Aluno;
 import src.model.CadastroAluno;
 
 public class TabelaAluno extends AbstractTableModel  {
     
     //Lista dos cadastros de alunos.
-    private ArrayList<CadastroAluno> cadastrosAlunos = new ArrayList<CadastroAluno>();
+    private List<CadastroAluno> cadastrosAlunos = new ArrayList<CadastroAluno>();
 
     //Array que titula as colunas da tabela:
     private String[] colunas = new String[] {"Nome completo", "Idade", "E-mail", 
@@ -91,6 +93,11 @@ public class TabelaAluno extends AbstractTableModel  {
 			cadastroAluno = cadastrosAlunos.get(indiceLinha);
 		}
 		return cadastroAluno;
+	}
+
+	public void carregar(List<CadastroAluno> cadastroAlunos){
+		this.cadastrosAlunos = cadastroAlunos;
+		fireTableDataChanged();
 	}
 
 

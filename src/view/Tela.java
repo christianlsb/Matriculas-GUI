@@ -34,6 +34,10 @@ public class Tela extends JFrame {
 		setLocationRelativeTo(null);
 		setVisible(true);
     }
+    public void mostrarTelaInicial(){
+        telaInicial.recarregar();
+        cardLayout.show(cardPainel,TelaInicial.class.getName());
+    }
     private void criarCards(){
         telaCadastro = new TelaCadastro();
         cardPainel.add(telaInicial, TelaCadastro.class.getName());
