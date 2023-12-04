@@ -1,15 +1,16 @@
 package src.view;
 
+import src.model.Aluno;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
-
-import src.model.CadastroAluno;
 
 public class TabelaAluno extends AbstractTableModel  {
     
     //Lista dos cadastros de alunos.
-    private ArrayList<CadastroAluno> cadastrosAlunos = new ArrayList<CadastroAluno>();
+    private List<Aluno> cadastrosAlunos = new ArrayList<Aluno>();
 
     //Array que titula as colunas da tabela:
     private String[] colunas = new String[] {"Nome completo", "Idade", "E-mail", 
@@ -17,7 +18,7 @@ public class TabelaAluno extends AbstractTableModel  {
                                             "Curso", "Observações", "Ativo"};
 
     //Construtor:
-    public TabelaAluno(ArrayList<CadastroAluno> cadastrosAlunos){
+    public TabelaAluno(ArrayList<Aluno> cadastrosAlunos){
         this.cadastrosAlunos = cadastrosAlunos;
     }
     //Método que retorna a quantidade de linhas da tabela (JTable):
@@ -47,14 +48,14 @@ public class TabelaAluno extends AbstractTableModel  {
 		String value = null;
 
 		if (indexLinha >= 0 && indexLinha < cadastrosAlunos.size()) {
-			CadastroAluno cadastroAluno = cadastrosAlunos.get(indexLinha);
+			Aluno cadastroAluno = cadastrosAlunos.get(indexLinha);
 
 			switch (indexColuna) {
 			case 0:
 				value = cadastroAluno.getNomeCompleto();
 				break;
 			case 1:
-				value = Integer.toString(cadastroAluno.getIdadeMatricula());
+				value = Integer.toString(cadastroAluno.getIdade());
 				break;
 			case 2:
 				value = cadastroAluno.getEmail();
@@ -84,8 +85,8 @@ public class TabelaAluno extends AbstractTableModel  {
 		return value;
 	}// Fim do método de pegar valor
 
-	public CadastroAluno getCadastroAluno(int indiceLinha) {
-		CadastroAluno cadastroAluno = null;
+	public Aluno getCadastroAluno(int indiceLinha) {
+		Aluno cadastroAluno = null;
 
 		if (indiceLinha >= 0 && indiceLinha < cadastrosAlunos.size()) {
 			cadastroAluno = cadastrosAlunos.get(indiceLinha);

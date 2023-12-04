@@ -1,8 +1,8 @@
 package src.view;
 
-import javax.swing.*;
+import src.model.Aluno;
 
-import src.model.CadastroAluno;
+import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,9 +11,10 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 public class TelaCadastro extends JPanel {
+    // Atributos
     private static final Insets FIELD_INSETS = new Insets(5, 10, 0, 0);
 
-    private CadastroAluno cadastro;
+    private Aluno cadastro;
 
     private GridBagLayout layout;
     private GridBagConstraints constraints;
@@ -58,7 +59,7 @@ public class TelaCadastro extends JPanel {
                     ativoCb.setSelected(false);
                 }else {
                     nomeCompletoTxt.setText(cadastro.getNomeCompleto());
-                    idadeMatriculaTxt.setText(Integer.toString(cadastro.getIdadeMatricula()));
+                    idadeMatriculaTxt.setText(Integer.toString(cadastro.getIdade()));
                     emailTxt.setText(cadastro.getEmail());
                     enderecoTxt.setText(cadastro.getEndereco());
                     cepTxt.setText(cadastro.getCep());
@@ -76,7 +77,7 @@ public class TelaCadastro extends JPanel {
         criarForm();
     }
 
-    public void setCadastro(CadastroAluno cadastro){
+    public void setCadastro(Aluno cadastro){
         this.cadastro = cadastro;
     }
 
@@ -186,9 +187,9 @@ public class TelaCadastro extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e){
                 if (cadastro == null){
-                    cadastro = new CadastroAluno();
+                    cadastro = new Aluno();
                     cadastro.setNomeCompleto(nomeCompletoTxt.getText());
-                    cadastro.setIdadeMatricula(Integer.parseInt(idadeMatriculaTxt.getText()));
+                    cadastro.setIdade(Integer.parseInt(idadeMatriculaTxt.getText()));
                     cadastro.setEmail(emailTxt.getText());
                     cadastro.setEndereco(enderecoTxt.getText());
                     cadastro.setCep(cepTxt.getText());
@@ -200,9 +201,9 @@ public class TelaCadastro extends JPanel {
                     cadastro.setAtivo(ativoCb.isSelected());
                     // inserir(cadastro);
                 }else{
-                    cadastro = new CadastroAluno();
+                    cadastro = new Aluno();
                     cadastro.setNomeCompleto(nomeCompletoTxt.getText());
-                    cadastro.setIdadeMatricula(Integer.parseInt(idadeMatriculaTxt.getText()));
+                    cadastro.setIdade(Integer.parseInt(idadeMatriculaTxt.getText()));
                     cadastro.setEmail(emailTxt.getText());
                     cadastro.setEndereco(enderecoTxt.getText());
                     cadastro.setCep(cepTxt.getText());

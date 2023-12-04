@@ -1,11 +1,9 @@
 package src.view;
 import javax.swing.*;
 
-import src.model.CadastroAluno;
+import src.model.ArmazenamentoAlunos;
 
 import java.awt.*;
-
-import static java.awt.GridBagConstraints.LINE_START;
 
 public class TelaInicial extends JPanel {
     // Atributos
@@ -13,9 +11,9 @@ public class TelaInicial extends JPanel {
     private GridBagLayout layout;
     private GridBagConstraints c;
     private JPanel sidePainel;
-    private JButton botao;
     private JPanel mainPainel;
     private JTable tabela;
+    private ArmazenamentoAlunos armazenamentoAlunos;
 
     // Construtor
     public TelaInicial(Tela tela) {
@@ -23,8 +21,6 @@ public class TelaInicial extends JPanel {
 
         layout = new GridBagLayout();
         c = new GridBagConstraints();
-        c.weightx = 0.5;
-        c.weighty = 0.5;
 
         setLayout(layout);
 
@@ -37,63 +33,54 @@ public class TelaInicial extends JPanel {
         sidePainel.setLayout(layout);
 
         inserirSideBotoes(sidePainel);
-        inserirIconeUsuario(sidePainel);
+        inserirSideIcone(sidePainel);
         // GridConstraints de TelaInicial
         c.gridx = 0;
         c.gridy = 0;
+        c.insets = new Insets(0,0,0,0);
         add(sidePainel, c);
     }
 
-    // Y altura, X comprimento
     private void inserirSideBotoes(JPanel sidePainel){
-        JPanel divBtn = new JPanel();
-        divBtn.setLayout(layout);
+        JPanel btnPainel = new JPanel();
+        btnPainel.setLayout(layout);
 
-        // GridConstraints de divBtn
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.insets = new Insets(50,60,50,60);
-
+        // Criando e adicionando os botões a btnPainel
+        JButton botao;
         botao = new JButton("CRIAR");
-        botao.setPreferredSize(new Dimension(130,50));
-        botao.setFont(new Font("Times New Roman", Font.PLAIN, 17));
-        c.gridx = 0;
-        c.gridy = 0;
-        divBtn.add(botao, c);
+        estilizarBtn(botao,0,0);
+        btnPainel.add(botao);
 
         botao = new JButton("ATUALIZAR");
-        botao.setPreferredSize(new Dimension(130,50));
-        botao.setFont(new Font("Times New Roman", Font.PLAIN, 17));
-        c.gridx = 0;
-        c.gridy = 1;
-        divBtn.add(botao, c);
+        estilizarBtn(botao,0,1);
+        btnPainel.add(botao);
 
         botao = new JButton("EXCLUIR");
-        botao.setPreferredSize(new Dimension(130,50));
-        botao.setFont(new Font("Times New Roman", Font.PLAIN, 17));
-        c.gridx = 0;
-        c.gridy = 2;
-        divBtn.add(botao, c);
+        estilizarBtn(botao,0,2);
+        btnPainel.add(botao);
 
-        // GridConstraints de sidePainel
+        // GridConstraints de btnPainel
         c.gridx = 0;
         c.gridy = 0;
         c.insets = new Insets(0,0,0,0);
-        sidePainel.add(divBtn, c);
+        sidePainel.add(btnPainel, c);
     }
 
-    private void inserirIconeUsuario(JPanel sidePainel) {
+    private void inserirSideIcone(JPanel sidePainel) {
         ImageIcon icone = new ImageIcon("src/img/icon.png");
+        JLabel labelIcone = new JLabel(icone, SwingConstants.LEADING);
 
-        JLabel labelIcone = new JLabel(icone);
-
+        // GridConstraints de labelIcone
         c.gridx = 0;
         c.gridy = 1;
+        c.insets = new Insets(0,5,0,0);
         sidePainel.add(labelIcone, c);
     }
 
     private void inserirMainPainel(){
         mainPainel = new JPanel();
         mainPainel.setLayout(layout);
+
 
         inserirMainTabela(mainPainel);
 
@@ -102,7 +89,7 @@ public class TelaInicial extends JPanel {
         c.gridy = 0;
         add(mainPainel, c);
     }
-    // Y altura, X comprimento
+
     private void inserirMainTabela(JPanel mainPainel){
         c.insets = new Insets(10,30,10,30);
 
@@ -113,11 +100,23 @@ public class TelaInicial extends JPanel {
         c.fill = GridBagConstraints.BOTH;
         mainPainel.add(cabecalhoMain, c);
 
-        tableModel = new TabelaAluno();
-        tabela = new JTable(37,9);
+        TabelaAluno tableModel = new TabelaAluno(ArmazenamentoAlunos.listar());
+        tabela = new JTable(27,9);
         c.gridx = 0;
         c.gridy = 1;
         c.fill = GridBagConstraints.BOTH;
         mainPainel.add(tabela, c);
     }
-}
+
+    private void estilizarBtn(JButton botao, int gridx, int gridy){
+        botao.setPreferredSize(new Dimension(130,50));
+        botao.setFont(new Font("Times New Roman", Font.PLAIN, 17));
+
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(50,60,50,60);
+        c.gridx = gridx;
+        c.gridy = gridy;
+
+        layout.setConstraints(botao, c);
+    }
+}// Fim da classe TelaInicial
