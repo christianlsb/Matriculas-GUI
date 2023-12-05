@@ -1,10 +1,5 @@
-package src.view;
+
 import javax.swing.*;
-
-
-import src.model.Aluno;
-import src.model.ArmazenamentoAlunos;
-
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

@@ -1,6 +1,4 @@
-package src.view;
 
-import src.model.Aluno;
 
 import java.util.ArrayList;
 import java.util.List;
