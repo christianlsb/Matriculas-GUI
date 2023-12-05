@@ -14,6 +14,7 @@ public class TelaCadastro extends JPanel {
     // Atributos
     private static final Insets FIELD_INSETS = new Insets(5, 10, 0, 0);
 
+    private Tela tela;
     private Aluno cadastro;
 
     private GridBagLayout layout;
@@ -35,7 +36,9 @@ public class TelaCadastro extends JPanel {
 
 
     //construtor
-    public TelaCadastro(){
+    public TelaCadastro(Tela tela){
+        this.tela = tela;
+
         cadastro = null;
 
         layout = new GridBagLayout();

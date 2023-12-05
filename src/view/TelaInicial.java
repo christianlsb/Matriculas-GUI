@@ -4,6 +4,8 @@ import javax.swing.*;
 import src.model.ArmazenamentoAlunos;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class TelaInicial extends JPanel {
     // Atributos
@@ -47,8 +49,16 @@ public class TelaInicial extends JPanel {
 
         // Criando e adicionando os botões a btnPainel
         JButton botao;
+
         botao = new JButton("CRIAR");
         estilizarBtn(botao,0,0);
+        botao.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tela.mostrarTelaCadastro();
+            }
+        });
         btnPainel.add(botao);
 
         botao = new JButton("ATUALIZAR");
