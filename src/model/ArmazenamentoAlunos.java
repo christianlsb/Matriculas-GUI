@@ -95,13 +95,13 @@ public class ArmazenamentoAlunos {
 	public static ArrayList<Aluno> listar() {
         ArrayList<Aluno> alunos = new ArrayList<>();
         
-        String query = "SELECT id, nomeCompleto, idade, email, endereco, cel, telefone," + //
-                                                    "curso, observacoes, ativo FROM aluno ORDER BY id";
+        String query = "SELECT * FROM aluno ORDER BY id";
         Connection conexao = null;
         Statement statement = null;
         ResultSet resultSet = null;
         //Tenta executar o bloco, se falhar levanta a exceção definida.
         try{
+            conexao = ConexaoFactory.getConexao();
             //A partir da conexão cria o statement.
             statement = conexao.createStatement();
             //Aloca os results da query.
@@ -126,12 +126,21 @@ public class ArmazenamentoAlunos {
 
                 alunos.add(aluno);
             }
-        }catch(Exception erro){
+        } catch(Exception erro){
             //Joga os erros no terminal.
             erro.printStackTrace();
+        } finally {
+            try {
+                if (statement != null)
+                    statement.close();
+                if (resultSet != null)
+                    resultSet.close();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
         }
 		return alunos;
-	}
+	} //  Fim do método listar
 }//Fim da classe ArmazenamentoAlunos
 
 

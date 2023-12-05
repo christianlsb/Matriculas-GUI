@@ -1,8 +1,7 @@
 package src.model;
 
-import java.util.ArrayList;
-
 public class Aluno {
+    // Atributos
     private int id;
     private String nomeCompleto;
     private int idade;
@@ -15,7 +14,8 @@ public class Aluno {
     private String curso;
     private String observacoes;
     private Boolean ativo;
-  
+
+    // Getter's & Setter's
     public int getId() {
         return this.id;
     }
@@ -23,7 +23,6 @@ public class Aluno {
     public void setId(int id) {
         this.id = id;
     }
-
 
     public String getNomeCompleto() {
         return this.nomeCompleto;
