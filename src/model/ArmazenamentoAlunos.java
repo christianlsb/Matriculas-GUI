@@ -9,8 +9,7 @@ import java.util.ArrayList;
 public class ArmazenamentoAlunos {
 
 	public static void inserir(Aluno aluno) {
-        String query = "INSERT INTO aluno (nomeCompleto, idade, email, endereco, cel, telefone,\" +" + //
-                                                                   "curso, observacoes, ativo) VALUES (?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO aluno (nomeCompleto, idade, email, endereco, cep, usuario, senha, telefone, curso, observacoes, ativo) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
         Connection conexao = null;
         PreparedStatement statement = null;
@@ -18,18 +17,21 @@ public class ArmazenamentoAlunos {
 
         try{
             //conectar*
+            conexao = ConexaoFactory.getConexao();
             //Já é feito a passagem da query.
             statement = conexao.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, aluno.getNomeCompleto());
             statement.setInt(2, aluno.getIdade());
             statement.setString(3, aluno.getEmail());
             statement.setString(4, aluno.getEndereco());
-            statement.setString(4, aluno.getCep());
-            statement.setString(5, aluno.getTelefone());
-            statement.setString(6, aluno.getCurso());
-            statement.setString(7, aluno.getObservacoes());
-            statement.setBoolean(8, aluno.getAtivo());
-            statement.setInt(9, aluno.getId());
+            statement.setString(5, aluno.getCep());
+            statement.setString(6, aluno.getUsuario());
+            statement.setString(7, aluno.getSenha());
+            statement.setString(8, aluno.getTelefone());
+            statement.setString(9, aluno.getCurso());
+            statement.setString(10, aluno.getObservacoes());
+            statement.setBoolean(11, aluno.getAtivo());
+            statement.setInt(12, aluno.getId());
             //A query já foi executada, então não precisa executar novamente.
             statement.execute();
             resultSet = statement.getGeneratedKeys();
@@ -53,6 +55,7 @@ public class ArmazenamentoAlunos {
 
         try{
             //conectar*
+            conexao = ConexaoFactory.getConexao();
             //Já é feito a passagem da query.
             statement = conexao.prepareStatement(query);
             statement.setString(1, aluno.getNomeCompleto());
@@ -81,6 +84,7 @@ public class ArmazenamentoAlunos {
 
         try{
             //conectar*
+            conexao = ConexaoFactory.getConexao();
             //Já é feito a passagem da query.
             statement = conexao.prepareStatement(query);
             statement.setInt(1, aluno.getId());
