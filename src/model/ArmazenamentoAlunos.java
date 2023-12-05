@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class ArmazenamentoAlunos {
 
 	public static void inserir(Aluno aluno) {
-        String query = "INSERT INTO aluno (nomeCompleto, idade, email, endereco, cep, usuario, senha, telefone, curso, observacoes, ativo) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO aluno (nomeCompleto, idade, email, endereco, cep, usuario, senha, telefone, curso, observacoes, ativo) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
         Connection conexao = null;
         PreparedStatement statement = null;
