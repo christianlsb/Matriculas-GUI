@@ -1,6 +1,4 @@
-package src.view;
 
-import src.model.Aluno;
 
 import javax.swing.*;
 
@@ -185,7 +183,7 @@ public class TelaCadastro extends JPanel {
 	}
 
     private void criarSalvarBtn(JPanel panel){
-        salvarBtn = new JButton("Salvar");
+        salvarBtn = new JButton("reste");
         salvarBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
@@ -207,8 +205,8 @@ public class TelaCadastro extends JPanel {
                     cadastro.setCurso(cursoTxt.getText());
                     cadastro.setObservacoes(observacoesTxt.getText());
                     cadastro.setAtivo(ativoCb.isSelected());
-                    // inserir(cadastro);
-                }else{
+                    ArmazenamentoAlunos.inserir(cadastro);
+                }else {
                     cadastro = new Aluno();
                     cadastro.setNomeCompleto(nomeCompletoTxt.getText());
                     cadastro.setIdade(Integer.parseInt(idadeMatriculaTxt.getText()));
@@ -221,12 +219,11 @@ public class TelaCadastro extends JPanel {
                     cadastro.setCurso(cursoTxt.getText());
                     cadastro.setObservacoes(observacoesTxt.getText());
                     cadastro.setAtivo(ativoCb.isSelected());
-                    // atualizar(cadastro);
+                    ArmazenamentoAlunos.atualizar(cadastro);
                 }
                 JOptionPane.showMessageDialog(TelaCadastro.this, "Cadastro feito com sucesso!", null,
 						JOptionPane.INFORMATION_MESSAGE);
                 tela.mostrarTelaInicial();
-
             }
         });
         panel.add(salvarBtn);
@@ -237,7 +234,7 @@ public class TelaCadastro extends JPanel {
         cancelarBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                //função de ir para a lista de cadastro
+                
             }
         });
         panel.add(cancelarBtn);

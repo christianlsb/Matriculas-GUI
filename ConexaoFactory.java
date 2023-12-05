@@ -1,4 +1,4 @@
-package src.model;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class ConexaoFactory { 
     //Protocolo pra conversar com o banco, porta para localizar o processo, database.
-    private static final String URL = "jdbc:mysql://localhost:3306/alunos";
+    private static final String URL = "jdbc:mysql://localhost:3306/MATRICULAS";
     private static final String USER = "root";
     private static final String PASS = "root";
 
