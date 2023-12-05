@@ -192,7 +192,12 @@ public class TelaCadastro extends JPanel {
                 if (cadastro == null){
                     cadastro = new Aluno();
                     cadastro.setNomeCompleto(nomeCompletoTxt.getText());
-                    cadastro.setIdade(Integer.parseInt(idadeMatriculaTxt.getText()));
+                    if (idadeMatriculaTxt.getText().equals("")){
+                        JOptionPane.showMessageDialog(TelaCadastro.this, "Por favor, insira uma Idade VALIDA!", null,
+                                JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        cadastro.setIdade(Integer.parseInt(idadeMatriculaTxt.getText()));
+                    }
                     cadastro.setEmail(emailTxt.getText());
                     cadastro.setEndereco(enderecoTxt.getText());
                     cadastro.setCep(cepTxt.getText());
@@ -220,6 +225,7 @@ public class TelaCadastro extends JPanel {
                 }
                 JOptionPane.showMessageDialog(TelaCadastro.this, "Cadastro feito com sucesso!", null,
 						JOptionPane.INFORMATION_MESSAGE);
+                tela.mostrarTelaInicial();
 
             }
         });

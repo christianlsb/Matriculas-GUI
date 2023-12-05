@@ -45,4 +45,8 @@ public class Tela extends JFrame {
     public void mostrarTelaCadastro(){
         cardLayout.show(cardPainel, TelaCadastro.class.getName());
     }
+
+    public void mostrarTelaInicial(){
+        cardLayout.show(cardPainel, TelaInicial.class.getName());
+    }
 } // Fim da classe TelaPrincipal
