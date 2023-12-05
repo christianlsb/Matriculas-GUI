@@ -31,7 +31,7 @@ public class TelaCadastro extends JPanel {
     private JCheckBox ativoCb;
     private JButton salvarBtn;
     private JButton cancelarBtn;
-
+    private boolean campoVazioEncontrado;
 
     //construtor
     public TelaCadastro(Tela tela){
@@ -187,47 +187,67 @@ public class TelaCadastro extends JPanel {
         salvarBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                if (cadastro == null){
-                    cadastro = new Aluno();
-                    cadastro.setNomeCompleto(nomeCompletoTxt.getText());
-                    if (idadeMatriculaTxt.getText().equals("")){
-                        JOptionPane.showMessageDialog(TelaCadastro.this, "Por favor, insira uma Idade VALIDA!", null,
-                                JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        cadastro.setIdade(Integer.parseInt(idadeMatriculaTxt.getText()));
-                    }
-                    cadastro.setEmail(emailTxt.getText());
-                    cadastro.setEndereco(enderecoTxt.getText());
-                    cadastro.setCep(cepTxt.getText());
-                    cadastro.setTelefone(telefoneTxt.getText());
-                    cadastro.setUsuario(usuarioTxt.getText());
-                    cadastro.setSenha(senhaTxt.getText());
-                    cadastro.setCurso(cursoTxt.getText());
-                    cadastro.setObservacoes(observacoesTxt.getText());
-                    cadastro.setAtivo(ativoCb.isSelected());
-                    ArmazenamentoAlunos.inserir(cadastro);
+                if (!validarCampos()) {
+                    return; 
                 }else{
-                    cadastro = new Aluno();
-                    cadastro.setNomeCompleto(nomeCompletoTxt.getText());
-                    cadastro.setIdade(Integer.parseInt(idadeMatriculaTxt.getText()));
-                    cadastro.setEmail(emailTxt.getText());
-                    cadastro.setEndereco(enderecoTxt.getText());
-                    cadastro.setCep(cepTxt.getText());
-                    cadastro.setTelefone(telefoneTxt.getText());
-                    cadastro.setUsuario(usuarioTxt.getText());
-                    cadastro.setSenha(senhaTxt.getText());
-                    cadastro.setCurso(cursoTxt.getText());
-                    cadastro.setObservacoes(observacoesTxt.getText());
-                    cadastro.setAtivo(ativoCb.isSelected());
-                    ArmazenamentoAlunos.atualizar(cadastro);
+                    if (cadastro == null){
+                        cadastro = new Aluno();
+                        cadastro.setNomeCompleto(nomeCompletoTxt.getText());
+                        cadastro.setIdade(Integer.parseInt(idadeMatriculaTxt.getText()));
+                        cadastro.setEmail(emailTxt.getText());
+                        cadastro.setEndereco(enderecoTxt.getText());
+                        cadastro.setCep(cepTxt.getText());
+                        cadastro.setTelefone(telefoneTxt.getText());
+                        cadastro.setUsuario(usuarioTxt.getText());
+                        cadastro.setSenha(senhaTxt.getText());
+                        cadastro.setCurso(cursoTxt.getText());
+                        cadastro.setObservacoes(observacoesTxt.getText());
+                        cadastro.setAtivo(ativoCb.isSelected());
+                        ArmazenamentoAlunos.inserir(cadastro);
+                        JOptionPane.showMessageDialog(TelaCadastro.this, "Cadastro feito com sucesso!", null,
+                        JOptionPane.INFORMATION_MESSAGE);
+                        cadastro = null;
+                        tela.mostrarTelaInicial();
+                    } else {
+                        cadastro = new Aluno();
+                        cadastro.setNomeCompleto(nomeCompletoTxt.getText());
+                        cadastro.setIdade(Integer.parseInt(idadeMatriculaTxt.getText()));
+                        cadastro.setEmail(emailTxt.getText());
+                        cadastro.setEndereco(enderecoTxt.getText());
+                        cadastro.setCep(cepTxt.getText());
+                        cadastro.setTelefone(telefoneTxt.getText());
+                        cadastro.setUsuario(usuarioTxt.getText());
+                        cadastro.setSenha(senhaTxt.getText());
+                        cadastro.setCurso(cursoTxt.getText());
+                        cadastro.setObservacoes(observacoesTxt.getText());
+                        cadastro.setAtivo(ativoCb.isSelected());
+                        ArmazenamentoAlunos.inserir(cadastro);
+                    }
+                 }
                 }
-                JOptionPane.showMessageDialog(TelaCadastro.this, "Cadastro feito com sucesso!", null,
-						JOptionPane.INFORMATION_MESSAGE);
-                tela.mostrarTelaInicial();
-
-            }
-        });
+            });
         panel.add(salvarBtn);
+    }
+
+    private boolean validarCampos() {
+        validarCampoVazio("Nome Completo", nomeCompletoTxt.getText());
+        validarCampoVazio("Idade/Matricula", idadeMatriculaTxt.getText());
+        validarCampoVazio("E-mail", emailTxt.getText());
+        validarCampoVazio("Endereco", enderecoTxt.getText());
+        validarCampoVazio("CEP", cepTxt.getText());
+        validarCampoVazio("Telefone", telefoneTxt.getText());
+        validarCampoVazio("Usuário", usuarioTxt.getText());
+        validarCampoVazio("Senha", senhaTxt.getText());
+        validarCampoVazio("Curso", cursoTxt.getText());
+        return !(campoVazioEncontrado);
+    }
+
+    public void validarCampoVazio(String campo, String valor) {
+        if (valor.equals("")) {
+            JOptionPane.showMessageDialog(TelaCadastro.this, "Por favor, insira um " + campo + " válido!", null,
+                    JOptionPane.INFORMATION_MESSAGE);
+            campoVazioEncontrado = true;
+        }
     }
 
     private void criarCancelarBtn(JPanel panel){
