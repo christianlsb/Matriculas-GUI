@@ -1,7 +1,4 @@
-package src.view;
 import javax.swing.*;
-
-import src.model.ArmazenamentoAlunos;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,6 +12,7 @@ public class TelaInicial extends JPanel {
     private JPanel sidePainel;
     private JPanel mainPainel;
     private JTable tabela;
+    private TabelaAluno tableModel;
     private ArmazenamentoAlunos armazenamentoAlunos;
 
     // Construtor
@@ -30,6 +28,10 @@ public class TelaInicial extends JPanel {
         inserirMainPainel();
     }
     // Métodos
+    public void recarregar(){
+        tableModel.carregar(ArmazenamentoAlunos.listar());
+    }
+
     private void inserirSidePainel(){
         sidePainel = new JPanel();
         sidePainel.setLayout(layout);
@@ -43,6 +45,21 @@ public class TelaInicial extends JPanel {
         add(sidePainel, c);
     }
 
+    private void inserirMainPainel(){
+        mainPainel = new JPanel();
+        mainPainel.setLayout(layout);
+
+        inserirMainTabela(mainPainel);
+
+        // GridConstraints de TelaInicial
+        c.insets = new Insets(10,30,5,30);
+        c.gridx = 1;
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.NORTH;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        add(mainPainel, c);
+    }
+
     private void inserirSideBotoes(JPanel sidePainel){
         JPanel btnPainel = new JPanel();
         btnPainel.setLayout(layout);
@@ -51,22 +68,27 @@ public class TelaInicial extends JPanel {
         JButton botao;
 
         botao = new JButton("CRIAR");
-        estilizarBtn(botao,0,0);
+        estilizar(botao,0,0);
         botao.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
-                tela.mostrarTelaCadastro();
+                tela.mostrarTelaCadastro(null);
             }
         });
         btnPainel.add(botao);
 
         botao = new JButton("ATUALIZAR");
-        estilizarBtn(botao,0,1);
+        estilizar(botao,0,1);
+        botao.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
         btnPainel.add(botao);
 
         botao = new JButton("EXCLUIR");
-        estilizarBtn(botao,0,2);
+        estilizar(botao,0,2);
         btnPainel.add(botao);
 
         // GridConstraints de btnPainel
@@ -77,48 +99,47 @@ public class TelaInicial extends JPanel {
     }
 
     private void inserirSideIcone(JPanel sidePainel) {
-        ImageIcon icone = new ImageIcon("src/img/icon.png");
+        ImageIcon icone = new ImageIcon("src/src.img/icon.png");
         JLabel labelIcone = new JLabel(icone, SwingConstants.LEADING);
 
         // GridConstraints de labelIcone
         c.gridx = 0;
         c.gridy = 1;
-        c.insets = new Insets(0,5,0,0);
+        c.insets = new Insets(0,0,0,0);
         sidePainel.add(labelIcone, c);
     }
 
-    private void inserirMainPainel(){
-        mainPainel = new JPanel();
-        mainPainel.setLayout(layout);
-
-
-        inserirMainTabela(mainPainel);
-
-        // GridConstraints de TelaInicial
-        c.gridx = 1;
-        c.gridy = 0;
-        add(mainPainel, c);
-    }
-
     private void inserirMainTabela(JPanel mainPainel){
-        c.insets = new Insets(10,30,10,30);
-
         JLabel cabecalhoMain = new JLabel("Tabela de estudantes", JLabel.CENTER);
         cabecalhoMain.setFont(new Font("Times New Roman", Font.PLAIN, 30));
-        c.gridx = 0;
-        c.gridy = 0;
-        c.fill = GridBagConstraints.BOTH;
-        mainPainel.add(cabecalhoMain, c);
+        adicionarComponentes(mainPainel, cabecalhoMain, 0, 0);
 
-        TabelaAluno tableModel = new TabelaAluno(ArmazenamentoAlunos.listar());
-        tabela = new JTable(27,9);
-        c.gridx = 0;
-        c.gridy = 1;
-        c.fill = GridBagConstraints.BOTH;
-        mainPainel.add(tabela, c);
+        tableModel = new TabelaAluno(ArmazenamentoAlunos.listar());
+        tabela = new JTable(tableModel);
+        estilizar(tabela);
+        adicionarComponentes(mainPainel, tabela, 0, 1);
+
+        JScrollPane scrollPane = new JScrollPane(tabela);
+        adicionarComponentes(mainPainel, scrollPane, 0, 2);
     }
 
-    private void estilizarBtn(JButton botao, int gridx, int gridy){
+    private void adicionarComponentes(JComponent componentePai, JComponent componente, int gridx, int gridy) {
+        c.insets = new Insets(0,0,0,0);
+        c.gridx = gridx;
+        c.gridy = gridy;
+        c.fill = GridBagConstraints.HORIZONTAL;
+
+        componentePai.add(componente, c);
+    }
+
+    private void estilizar(JTable tabela) {
+        tabela.setPreferredScrollableViewportSize(new Dimension(700,615));
+        tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabela.getColumnModel().getColumn(0).setPreferredWidth(115);
+        tabela.getColumnModel().getColumn(7).setPreferredWidth(100);
+    }
+
+    private void estilizar(JButton botao, int gridx, int gridy){
         botao.setPreferredSize(new Dimension(130,50));
         botao.setFont(new Font("Times New Roman", Font.PLAIN, 17));
 

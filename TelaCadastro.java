@@ -1,7 +1,3 @@
-package src.view;
-
-import src.model.Aluno;
-
 import javax.swing.*;
 
 import java.awt.*;
@@ -207,7 +203,7 @@ public class TelaCadastro extends JPanel {
                     cadastro.setCurso(cursoTxt.getText());
                     cadastro.setObservacoes(observacoesTxt.getText());
                     cadastro.setAtivo(ativoCb.isSelected());
-                    // inserir(cadastro);
+                    ArmazenamentoAlunos.inserir(cadastro);
                 }else{
                     cadastro = new Aluno();
                     cadastro.setNomeCompleto(nomeCompletoTxt.getText());
@@ -221,12 +217,11 @@ public class TelaCadastro extends JPanel {
                     cadastro.setCurso(cursoTxt.getText());
                     cadastro.setObservacoes(observacoesTxt.getText());
                     cadastro.setAtivo(ativoCb.isSelected());
-                    // atualizar(cadastro);
+                    ArmazenamentoAlunos.atualizar(cadastro);
                 }
                 JOptionPane.showMessageDialog(TelaCadastro.this, "Cadastro feito com sucesso!", null,
 						JOptionPane.INFORMATION_MESSAGE);
                 tela.mostrarTelaInicial();
-
             }
         });
         panel.add(salvarBtn);
