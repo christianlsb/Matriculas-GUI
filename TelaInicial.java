@@ -13,7 +13,6 @@ public class TelaInicial extends JPanel {
     private JPanel mainPainel;
     private JTable tabela;
     private TabelaAluno tableModel;
-    private ArmazenamentoAlunos armazenamentoAlunos;
 
     // Construtor
     public TelaInicial(Tela tela) {
@@ -38,11 +37,8 @@ public class TelaInicial extends JPanel {
 
         inserirSideBotoes(sidePainel);
         inserirSideIcone(sidePainel);
-        // GridConstraints de TelaInicial
-        c.gridx = 0;
-        c.gridy = 0;
-        c.insets = new Insets(0,0,0,0);
-        add(sidePainel, c);
+   
+        adicionarComponente(this, sidePainel, 0, 0);
     }
 
     private void inserirMainPainel(){
@@ -82,48 +78,52 @@ public class TelaInicial extends JPanel {
         botao.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                tela.mostrarTelaCadastro(tableModel.getCadastroAluno(tabela.getSelectedRow()));
             }
         });
         btnPainel.add(botao);
 
         botao = new JButton("EXCLUIR");
         estilizar(botao,0,2);
+        botao.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Aluno aluno = tableModel.getCadastroAluno(tabela.getSelectedRow());
+                int confirmar = JOptionPane.showConfirmDialog(TelaInicial.this, "Quer realmente excluir isto?",
+                                                             Tela.titulo, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (confirmar == JOptionPane.YES_OPTION){
+                    ArmazenamentoAlunos.remover(aluno);
+                    tableModel.remover(aluno);
+                }
+            }
+        });
         btnPainel.add(botao);
 
-        // GridConstraints de btnPainel
-        c.gridx = 0;
-        c.gridy = 0;
-        c.insets = new Insets(0,0,0,0);
-        sidePainel.add(btnPainel, c);
+        adicionarComponente(sidePainel, btnPainel, 0, 0);
     }
 
     private void inserirSideIcone(JPanel sidePainel) {
-        ImageIcon icone = new ImageIcon("src/src.img/icon.png");
-        JLabel labelIcone = new JLabel(icone, SwingConstants.LEADING);
-
-        // GridConstraints de labelIcone
-        c.gridx = 0;
-        c.gridy = 1;
-        c.insets = new Insets(0,0,0,0);
-        sidePainel.add(labelIcone, c);
+        ImageIcon icone = new ImageIcon("src/img/icon.png");
+        JLabel labelIcone = new JLabel(icone, SwingConstants.CENTER);
+        
+        adicionarComponente(sidePainel, labelIcone, 0, 1);
     }
 
     private void inserirMainTabela(JPanel mainPainel){
         JLabel cabecalhoMain = new JLabel("Tabela de estudantes", JLabel.CENTER);
         cabecalhoMain.setFont(new Font("Times New Roman", Font.PLAIN, 30));
-        adicionarComponentes(mainPainel, cabecalhoMain, 0, 0);
+        adicionarComponente(mainPainel, cabecalhoMain, 0, 0);
 
         tableModel = new TabelaAluno(ArmazenamentoAlunos.listar());
         tabela = new JTable(tableModel);
         estilizar(tabela);
-        adicionarComponentes(mainPainel, tabela, 0, 1);
+        adicionarComponente(mainPainel, tabela, 0, 1);
 
         JScrollPane scrollPane = new JScrollPane(tabela);
-        adicionarComponentes(mainPainel, scrollPane, 0, 2);
+        adicionarComponente(mainPainel, scrollPane, 0, 2);
     }
 
-    private void adicionarComponentes(JComponent componentePai, JComponent componente, int gridx, int gridy) {
+    private void adicionarComponente(JComponent componentePai, JComponent componente, int gridx, int gridy) {
         c.insets = new Insets(0,0,0,0);
         c.gridx = gridx;
         c.gridy = gridy;
