@@ -1,4 +1,4 @@
-
+package src.model;
 
 import java.sql.Statement;
 import java.sql.Connection;
@@ -9,14 +9,14 @@ import java.util.ArrayList;
 public class ArmazenamentoAlunos {
 
 	public static void inserir(Aluno aluno) {
-        String query = "INSERT INTO aluno (nomeCompleto, idade, email, endereco, cep, telefone,usuario, senha, curso,observacoes,ativo) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO aluno (nomeCompleto, idade, email, endereco, cel, telefone,\" +" + //
+                                                                   "curso, observacoes, ativo) VALUES (?,?,?,?,?,?,?,?,?)";
 
         Connection conexao = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
         try{
-            conexao = ConexaoFactory.getConexao();
             //conectar*
             //Já é feito a passagem da query.
             statement = conexao.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -24,13 +24,12 @@ public class ArmazenamentoAlunos {
             statement.setInt(2, aluno.getIdade());
             statement.setString(3, aluno.getEmail());
             statement.setString(4, aluno.getEndereco());
-            statement.setString(5, aluno.getCep());
-            statement.setString(6, aluno.getTelefone());
-            statement.setString(7, aluno.getUsuario());
-            statement.setString(8, aluno.getSenha());
-            statement.setString(9, aluno.getCurso());
-            statement.setString(10, aluno.getObservacoes());
-            statement.setBoolean(11, aluno.getAtivo());
+            statement.setString(4, aluno.getCep());
+            statement.setString(5, aluno.getTelefone());
+            statement.setString(6, aluno.getCurso());
+            statement.setString(7, aluno.getObservacoes());
+            statement.setBoolean(8, aluno.getAtivo());
+            statement.setInt(9, aluno.getId());
             //A query já foi executada, então não precisa executar novamente.
             statement.execute();
             resultSet = statement.getGeneratedKeys();
@@ -53,7 +52,6 @@ public class ArmazenamentoAlunos {
         PreparedStatement statement = null;
 
         try{
-            conexao = ConexaoFactory.getConexao();
             //conectar*
             //Já é feito a passagem da query.
             statement = conexao.prepareStatement(query);
@@ -61,12 +59,12 @@ public class ArmazenamentoAlunos {
             statement.setInt(2, aluno.getIdade());
             statement.setString(3, aluno.getEmail());
             statement.setString(4, aluno.getEndereco());
-            statement.setString(5, aluno.getCep());
-            statement.setString(6, aluno.getTelefone());
-            statement.setString(7, aluno.getCurso());
-            statement.setString(8, aluno.getObservacoes());
-            statement.setBoolean(9, aluno.getAtivo());
-            statement.setInt(10, aluno.getId());
+            statement.setString(4, aluno.getCep());
+            statement.setString(5, aluno.getTelefone());
+            statement.setString(6, aluno.getCurso());
+            statement.setString(7, aluno.getObservacoes());
+            statement.setBoolean(8, aluno.getAtivo());
+            statement.setInt(9, aluno.getId());
             //A query já foi executada, então não precisa executar novamente.
             statement.execute();
         }catch(Exception erro){
@@ -76,13 +74,12 @@ public class ArmazenamentoAlunos {
 
 	public static void remover(Aluno aluno) {
         //Não dá pra saber o id, então usa ? e troca pelo valor definido no parâmetro.
-        String query = "DELETE FROM aluno WHERE id = ?";
+        String query = "DELET FROM aluno WHERE id = ?";
 
         Connection conexao = null;
         PreparedStatement statement = null;
 
         try{
-            conexao = ConexaoFactory.getConexao();
             //conectar*
             //Já é feito a passagem da query.
             statement = conexao.prepareStatement(query);
