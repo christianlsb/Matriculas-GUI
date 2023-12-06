@@ -18,6 +18,7 @@ public class TelaCadastro extends JPanel {
     private GridBagLayout layout;
     private GridBagConstraints constraints;
 
+    private JTextField idTxt;
     private JTextField nomeCompletoTxt;
     private JTextField idadeMatriculaTxt;
     private JTextField emailTxt;
@@ -47,6 +48,7 @@ public class TelaCadastro extends JPanel {
             @Override
             public void componentShown(ComponentEvent e){
                 if (cadastro == null){
+                    idTxt.setText("");
                     nomeCompletoTxt.setText("");
                     idadeMatriculaTxt.setText("");
                     emailTxt.setText("");
@@ -59,6 +61,7 @@ public class TelaCadastro extends JPanel {
                     observacoesTxt.setText("");
                     ativoCb.setSelected(false);
                 }else {
+                    idTxt.setText(Integer.toString(cadastro.getId()));
                     nomeCompletoTxt.setText(cadastro.getNomeCompleto());
                     idadeMatriculaTxt.setText(Integer.toString(cadastro.getIdade()));
                     emailTxt.setText(cadastro.getEmail());
@@ -188,6 +191,7 @@ public class TelaCadastro extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e){
                 if (!validarCampos()) {
+                    tela.mostrarTelaCadastro(cadastro);
                     return; 
                 }else{
                     if (cadastro == null){
@@ -209,7 +213,7 @@ public class TelaCadastro extends JPanel {
                         cadastro = null;
                         tela.mostrarTelaInicial();
                     } else {
-                        cadastro = new Aluno();
+                        cadastro.setId(Integer.parseInt(idTxt.getText()));
                         cadastro.setNomeCompleto(nomeCompletoTxt.getText());
                         cadastro.setIdade(Integer.parseInt(idadeMatriculaTxt.getText()));
                         cadastro.setEmail(emailTxt.getText());
@@ -221,9 +225,11 @@ public class TelaCadastro extends JPanel {
                         cadastro.setCurso(cursoTxt.getText());
                         cadastro.setObservacoes(observacoesTxt.getText());
                         cadastro.setAtivo(ativoCb.isSelected());
-                        ArmazenamentoAlunos.inserir(cadastro);
+                        ArmazenamentoAlunos.atualizar(cadastro);
+                        tela.mostrarTelaInicial();
                     }
                  }
+                 tela.mostrarTelaInicial();
                 }
             });
         panel.add(salvarBtn);
@@ -247,6 +253,7 @@ public class TelaCadastro extends JPanel {
             JOptionPane.showMessageDialog(TelaCadastro.this, "Por favor, insira um " + campo + " válido!", null,
                     JOptionPane.INFORMATION_MESSAGE);
             campoVazioEncontrado = true;
+            tela.mostrarTelaCadastro(cadastro);
         }
     }
 
@@ -255,7 +262,7 @@ public class TelaCadastro extends JPanel {
         cancelarBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                //função de ir para a lista de cadastro
+                tela.mostrarTelaInicial();
             }
         });
         panel.add(cancelarBtn);

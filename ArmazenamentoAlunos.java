@@ -1,5 +1,3 @@
-
-
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,6 +14,7 @@ public class ArmazenamentoAlunos {
         ResultSet resultSet = null;
 
         try{
+            conexao = ConexaoFactory.getConexao();
             //conectar*
             conexao = ConexaoFactory.getConexao();
             //Já é feito a passagem da query.
@@ -31,6 +30,7 @@ public class ArmazenamentoAlunos {
             statement.setString(9, aluno.getCurso());
             statement.setString(10, aluno.getObservacoes());
             statement.setBoolean(11, aluno.getAtivo());
+            //statement.setInt(9, aluno.getId());
             //A query já foi executada, então não precisa executar novamente.
             statement.execute();
             resultSet = statement.getGeneratedKeys();
@@ -46,13 +46,13 @@ public class ArmazenamentoAlunos {
 
 	public static void atualizar(Aluno aluno) {
         //Se o campo vier vazio, ele atualiza para o que já estava no banco.
-		String query = "UPDATE aluno SET nomeCompleto = ?, idade = ?, email = ?, endereco = ?, cep = ?, telefone = ?,"+ //
-		                                                                    "curso = ?, observacoes = ?, ativo = ? WHERE id = ?";
+		String query = "UPDATE aluno SET nomeCompleto = ?, idade = ?, email = ?, endereco = ?, cep = ?, telefone = ?, usuario = ?, senha = ?, curso = ?, observacoes = ?, ativo = ? WHERE id = ?";
 
         Connection conexao = null;
         PreparedStatement statement = null;
 
         try{
+            conexao = ConexaoFactory.getConexao();
             //conectar*
             conexao = ConexaoFactory.getConexao();
             //Já é feito a passagem da query.
@@ -63,10 +63,11 @@ public class ArmazenamentoAlunos {
             statement.setString(4, aluno.getEndereco());
             statement.setString(5, aluno.getCep());
             statement.setString(6, aluno.getTelefone());
-            statement.setString(7, aluno.getCurso());
-            statement.setString(8, aluno.getObservacoes());
-            statement.setBoolean(9, aluno.getAtivo());
-            statement.setInt(10, aluno.getId());
+            statement.setString(7, aluno.getUsuario());
+            statement.setString(8, aluno.getSenha());
+            statement.setString(9, aluno.getCurso());
+            statement.setString(10, aluno.getObservacoes());
+            statement.setBoolean(11, aluno.getAtivo());
             //A query já foi executada, então não precisa executar novamente.
             statement.execute();
         }catch(Exception erro){

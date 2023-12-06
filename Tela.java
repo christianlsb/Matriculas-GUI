@@ -1,4 +1,3 @@
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -8,8 +7,10 @@ import java.awt.*;
 public class Tela extends JFrame {
     // Atributos
     public static final String titulo = "TELA INICIAL";
+
     private CardLayout cardLayout;
     private JPanel cardPainel;
+
     private TelaInicial telaInicial;
     private TelaCadastro telaCadastro;
 
@@ -17,7 +18,7 @@ public class Tela extends JFrame {
     public Tela(){
         super(titulo);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setResizable(true);
+        this.setResizable(false);
 
         this.cardLayout = new CardLayout();
         
@@ -43,11 +44,13 @@ public class Tela extends JFrame {
         cardPainel.add(telaCadastro, TelaCadastro.class.getName());
     }
 
-    public void mostrarTelaCadastro(){
+    public void mostrarTelaCadastro(Aluno aluno){
+        telaCadastro.setCadastro(aluno);
         cardLayout.show(cardPainel, TelaCadastro.class.getName());
     }
 
     public void mostrarTelaInicial(){
+        telaInicial.recarregar();
         cardLayout.show(cardPainel, TelaInicial.class.getName());
 
     }

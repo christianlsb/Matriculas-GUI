@@ -1,5 +1,3 @@
-
-
 public class Aluno {
     // Atributos
     private int id;

@@ -6,10 +6,8 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 public class TabelaAluno extends AbstractTableModel  {
-    
     //Lista dos cadastros de alunos.
     private List<Aluno> cadastrosAlunos = new ArrayList<Aluno>();
-
     //Array que titula as colunas da tabela:
     private String[] colunas = new String[] {"Nome completo", "Idade", "E-mail", 
                                             "Endereço", "CEP", "Telefone",
@@ -29,7 +27,6 @@ public class TabelaAluno extends AbstractTableModel  {
 	public int getColumnCount() {
 		return colunas.length;
 	}
-
     //Método que retorna os nomes das colunas (O JTable itera pra passar por todas):
 	@Override
 	public String getColumnName(int indexColuna) {
@@ -92,6 +89,14 @@ public class TabelaAluno extends AbstractTableModel  {
 		return cadastroAluno;
 	}
 
+	public void carregar(List<Aluno> alunos){
+		this.cadastrosAlunos = alunos;
+		fireTableDataChanged();
+	}
 
+	public void remover(Aluno aluno){
+		cadastrosAlunos.remove(aluno);
+		fireTableDataChanged();
+	}
 }//Fim da classe TabelaAluno
 
