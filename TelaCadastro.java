@@ -29,6 +29,8 @@ public class TelaCadastro extends JPanel {
     private JTextField senhaTxt;
     private JTextField cursoTxt;
     private JTextArea observacoesTxt;
+    private JComboBox<String> cursoTxt;
+    private JTextArea observacoesTxt;
     private JCheckBox ativoCb;
     private JButton salvarBtn;
     private JButton cancelarBtn;
@@ -57,7 +59,7 @@ public class TelaCadastro extends JPanel {
                     telefoneTxt.setText("");
                     usuarioTxt.setText("");
                     senhaTxt.setText("");
-                    cursoTxt.setText("");
+                    cursoTxt.setToolTipText("");
                     observacoesTxt.setText("");
                     ativoCb.setSelected(false);
                 }else {
@@ -70,7 +72,7 @@ public class TelaCadastro extends JPanel {
                     telefoneTxt.setText(cadastro.getTelefone());
                     usuarioTxt.setText(cadastro.getUsuario());
                     senhaTxt.setText(cadastro.getSenha());
-                    cursoTxt.setText(cadastro.getCurso());
+                    cursoTxt.setToolTipText(cadastro.getCurso());
                     observacoesTxt.setText(cadastro.getObservacoes());
                     ativoCb.setSelected(cadastro.getAtivo());
 
@@ -89,73 +91,74 @@ public class TelaCadastro extends JPanel {
 
         JLabel nome;
 
-        nome = new JLabel("Nome Completo");
+        nome = new JLabel("Nome completo");
         adicionarComponente(nome, 0, 0);
         nomeCompletoTxt = new JTextField(10);
         nomeCompletoTxt.setEditable(true);
         adicionarComponente(nomeCompletoTxt, 0, 1);
 
-        idTxt = new JTextField();
-
-        nome = new JLabel("Idade Matricula");
-        adicionarComponente(nome, 0, 2);
+        nome = new JLabel("Idade completa");
+        adicionarComponente(nome, 0, 3);
         idadeMatriculaTxt = new JTextField(10);
         idadeMatriculaTxt.setEditable(true);
-        adicionarComponente(idadeMatriculaTxt, 0, 3);
+        adicionarComponente(idadeMatriculaTxt, 0, 4);
 
-        nome = new JLabel("Email");
+        nome = new JLabel("E-mail");
         adicionarComponente(nome, 1, 0);
         emailTxt = new JTextField(10);
         emailTxt.setEditable(true);
         adicionarComponente(emailTxt, 1, 1);
 
-        nome = new JLabel("Endereco");
-        adicionarComponente(nome, 1, 2);
+        nome = new JLabel("Endereço");
+        adicionarComponente(nome, 1, 3);
         enderecoTxt = new JTextField(10);
         enderecoTxt.setEditable(true);
-        adicionarComponente(enderecoTxt, 1, 3);
+        adicionarComponente(enderecoTxt, 1, 4);
 
-        nome = new JLabel("Cep");
+        nome = new JLabel("CEP");
         adicionarComponente(nome, 2, 0);
         cepTxt = new JTextField(10);
         cepTxt.setEditable(true);
         adicionarComponente(cepTxt, 2, 1);
 
         nome = new JLabel("Telefone");
-        adicionarComponente(nome, 2, 2);
+        adicionarComponente(nome, 2, 3);
         telefoneTxt = new JTextField(10);
         telefoneTxt.setEditable(true);
-        adicionarComponente(telefoneTxt, 2, 3);
+        adicionarComponente(telefoneTxt, 2, 4);
 
-        nome = new JLabel("Usuario");
+        nome = new JLabel("Usuário");
         adicionarComponente(nome, 3, 0);
         usuarioTxt = new JTextField(10);
         usuarioTxt.setEditable(true);
         adicionarComponente(usuarioTxt, 3, 1);
 
         nome = new JLabel("Senha");
-        adicionarComponente(nome, 3, 2);
-        senhaTxt = new JTextField(10);
+        adicionarComponente(nome, 3, 3);
+        senhaTxt = new JPasswordField(10);
         senhaTxt.setEditable(true);
-        adicionarComponente(senhaTxt, 3, 3);
+        adicionarComponente(senhaTxt, 3, 4);
 
         nome = new JLabel("Curso");
         adicionarComponente(nome, 4, 0);
-        cursoTxt = new JTextField(10);
-        cursoTxt.setEditable(true);
+        cursoTxt = new JComboBox<String>();
+        cursoTxt.addItem("");
+        cursoTxt.addItem("Análise e Desenvolvimento de Sistemas");
+        cursoTxt.addItem("Ciência da Computação");
+        cursoTxt.addItem("Engenharia da Computação");
+        cursoTxt.addItem("Engenharia de Software");
+        cursoTxt.addItem("Gestão da Tecnologia da Informação");
+        cursoTxt.addItem("Sistemas de Informação");
+        cursoTxt.setEditable(false);
         adicionarComponente(cursoTxt, 4, 1);
 
         nome = new JLabel("Observações");
-        adicionarComponente(nome, 4, 2);
+        adicionarComponente(nome, 4, 3);
         observacoesTxt = new JTextArea();
         observacoesTxt.setEditable(true);
-        observacoesTxt.setLineWrap(true);
-        JScrollPane scrollPane = new JScrollPane(observacoesTxt);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        adicionarComponente(observacoesTxt, 4, 3);
+        adicionarComponente(observacoesTxt, 4, 4);
 
-        nome = new JLabel("Aluno Ativo");
+        nome = new JLabel("Aluno está ativo?");
         adicionarComponente(nome, 5, 0);
         ativoCb = new JCheckBox();
         ativoCb.setFocusable(true);
@@ -191,46 +194,42 @@ public class TelaCadastro extends JPanel {
 		adicionarComponente(btnPanel, 7, 1, 2, 1);
 	}
 
+    private Aluno criarAluno(){
+        cadastro = new Aluno();
+            cadastro.setNomeCompleto(nomeCompletoTxt.getText());
+            //cadastro.setIdade(Integer.parseInt(idadeMatriculaTxt.getText()));
+            cadastro.setEmail(emailTxt.getText());
+            cadastro.setEndereco(enderecoTxt.getText());
+            cadastro.setCep(cepTxt.getText());
+            cadastro.setTelefone(telefoneTxt.getText());
+            cadastro.setUsuario(usuarioTxt.getText());
+            cadastro.setSenha(senhaTxt.getText());
+            cadastro.setCurso((String) cursoTxt.getSelectedItem());
+            cadastro.setObservacoes(observacoesTxt.getText());
+            cadastro.setAtivo(ativoCb.isSelected());
+        return cadastro;
+    }
+
     private void criarSalvarBtn(JPanel panel){
         salvarBtn = new JButton("Salvar");
         salvarBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                if (!validarCampos()) return;
-                else{
+                if (!validarCampos()) {
+                    return;
+                }else{
                     if (cadastro == null){
-                        cadastro = new Aluno();
-                        cadastro.setNomeCompleto(nomeCompletoTxt.getText());
-                        cadastro.setIdade(Integer.parseInt(idadeMatriculaTxt.getText()));
-                        cadastro.setEmail(emailTxt.getText());
-                        cadastro.setEndereco(enderecoTxt.getText());
-                        cadastro.setCep(cepTxt.getText());
-                        cadastro.setTelefone(telefoneTxt.getText());
-                        cadastro.setUsuario(usuarioTxt.getText());
-                        cadastro.setSenha(senhaTxt.getText());
-                        cadastro.setCurso(cursoTxt.getText());
-                        cadastro.setObservacoes(observacoesTxt.getText());
-                        cadastro.setAtivo(ativoCb.isSelected());
+                        cadastro = criarAluno();
                         ArmazenamentoAlunos.inserir(cadastro);
                         JOptionPane.showMessageDialog(TelaCadastro.this, "Cadastro feito com sucesso!", null,
                         JOptionPane.INFORMATION_MESSAGE);
                         cadastro = null;
                         tela.mostrarTelaInicial();
                     } else {
-                        cadastro = new Aluno();
-                        cadastro.setId(Integer.parseInt(idTxt.getText()));
-                        cadastro.setNomeCompleto(nomeCompletoTxt.getText());
-                        cadastro.setIdade(Integer.parseInt(idadeMatriculaTxt.getText()));
-                        cadastro.setEmail(emailTxt.getText());
-                        cadastro.setEndereco(enderecoTxt.getText());
-                        cadastro.setCep(cepTxt.getText());
-                        cadastro.setTelefone(telefoneTxt.getText());
-                        cadastro.setUsuario(usuarioTxt.getText());
-                        cadastro.setSenha(senhaTxt.getText());
-                        cadastro.setCurso(cursoTxt.getText());
-                        cadastro.setObservacoes(observacoesTxt.getText());
-                        cadastro.setAtivo(ativoCb.isSelected());
+                        cadastro = criarAluno();
                         ArmazenamentoAlunos.atualizar(cadastro);
+                        JOptionPane.showMessageDialog(TelaCadastro.this, "Cadastro atualizado com sucesso!", null,
+                        JOptionPane.INFORMATION_MESSAGE);
                         tela.mostrarTelaInicial();
                     }
                     tela.mostrarTelaInicial();
@@ -246,11 +245,9 @@ public class TelaCadastro extends JPanel {
         validarCampoVazio("Idade/Matricula", idadeMatriculaTxt.getText());
         validarCampoVazio("E-mail", emailTxt.getText());
         validarCampoVazio("Endereco", enderecoTxt.getText());
-        validarCampoVazio("CEP", cepTxt.getText());
-        validarCampoVazio("Telefone", telefoneTxt.getText());
         validarCampoVazio("Usuário", usuarioTxt.getText());
         validarCampoVazio("Senha", senhaTxt.getText());
-        validarCampoVazio("Curso", cursoTxt.getText());
+        validarCampoVazio("Curso", (String) cursoTxt.getSelectedItem());
         return !(campoVazioEncontrado);
     }
 
