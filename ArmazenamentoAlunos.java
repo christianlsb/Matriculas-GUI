@@ -52,7 +52,6 @@ public class ArmazenamentoAlunos {
         PreparedStatement statement = null;
 
         try{
-            conexao = ConexaoFactory.getConexao();
             //conectar*
             conexao = ConexaoFactory.getConexao();
             //Já é feito a passagem da query.
@@ -68,10 +67,19 @@ public class ArmazenamentoAlunos {
             statement.setString(9, aluno.getCurso());
             statement.setString(10, aluno.getObservacoes());
             statement.setBoolean(11, aluno.getAtivo());
+            statement.setInt(12, aluno.getId());
             //A query já foi executada, então não precisa executar novamente.
             statement.execute();
         }catch(Exception erro){
             erro.printStackTrace();
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (Exception e){
+                e.printStackTrace();
+            }
         }
 	}//Fim do método atualizar.
 
