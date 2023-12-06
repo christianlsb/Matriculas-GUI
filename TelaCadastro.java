@@ -258,9 +258,20 @@ public class TelaCadastro extends JPanel {
             JOptionPane.showMessageDialog(TelaCadastro.this, "Por favor, insira um " + campo + " válido!", null,
                     JOptionPane.INFORMATION_MESSAGE);
             campoVazioEncontrado = true;
-        } else if (campo.equals("Idade completa")) {
+        } 
+        //pega o campo de idade completa e verifica se é um inteiro
+        else if (campo.equals("Idade completa")) {
             try {
-                int inteiro = Integer.parseInt(valor);
+            int inteiro  = Integer.parseInt(valor);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(TelaCadastro.this, "Por favor, insira uma idade válida!", null,
+                        JOptionPane.INFORMATION_MESSAGE);
+                campoVazioEncontrado = true;
+            }
+        }
+        else if (campo.equals("Idade completa")) {
+            try {
+            int inteiro  = Integer.parseInt(valor);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(TelaCadastro.this, "Por favor, insira uma idade válida!", null,
                         JOptionPane.INFORMATION_MESSAGE);
