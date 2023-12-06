@@ -28,7 +28,7 @@ public class TelaCadastro extends JPanel {
     private JTextField usuarioTxt;
     private JTextField senhaTxt;
     private JTextField cursoTxt;
-    private JTextField observacoesTxt;
+    private JTextArea observacoesTxt;
     private JCheckBox ativoCb;
     private JButton salvarBtn;
     private JButton cancelarBtn;
@@ -147,8 +147,12 @@ public class TelaCadastro extends JPanel {
 
         nome = new JLabel("Observações");
         adicionarComponente(nome, 4, 2);
-        observacoesTxt = new JTextField(10);
+        observacoesTxt = new JTextArea();
         observacoesTxt.setEditable(true);
+        observacoesTxt.setLineWrap(true);
+        JScrollPane scrollPane = new JScrollPane(observacoesTxt);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         adicionarComponente(observacoesTxt, 4, 3);
 
         nome = new JLabel("Aluno Ativo");
