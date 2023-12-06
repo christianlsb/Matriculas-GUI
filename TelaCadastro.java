@@ -132,7 +132,7 @@ public class TelaCadastro extends JPanel {
         adicionarComponente(usuarioTxt, 3, 1);
 
         nome = new JLabel("Senha");
-        adicionarComponente(nome, 3, 3);
+        adicionarComponente(nome, 3, 2);
         senhaTxt = new JPasswordField(10);
         senhaTxt.setEditable(true);
         adicionarComponente(senhaTxt, 3, 3);
