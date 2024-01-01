@@ -11,6 +11,7 @@ liste, cadastre, atualize e remova matrículas.
 
 1. Certifique-se de ter o Java instalado em sua máquina.
 2. Execute o script SQL `alunos.sql` localizado em `resources/alunos.sql` para criar e configurar o banco de dados necessário.
+3. Em `ConexaoFactory.java` configure conforme seu banco de dados (port, user e password).
 
 ## Como Usar
 
